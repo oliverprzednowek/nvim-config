@@ -1,4 +1,2 @@
 require("plugin.lazy_init")
-require("mason").setup()
-require("mason-lspconfig").setup()
-
+require("plugin.lsp_init")
