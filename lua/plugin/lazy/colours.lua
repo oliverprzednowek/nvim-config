@@ -3,8 +3,7 @@ function setTheme(colour)
 	vim.cmd("colorscheme " .. colour)
 end
 
-return 
-{
+return {
 	{
 		"folke/tokyonight.nvim",
 		-- lazy = false,
@@ -15,7 +14,6 @@ return
 				style = "night",
 			})
 			setTheme()
-		end
-	}
-	
+		end,
+	},
 }

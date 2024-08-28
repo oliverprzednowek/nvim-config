@@ -4,15 +4,24 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "jj", "<Esc>")
 
 -- setting up plugin remaps
-vim.keymap.set("n", "<leader>e", ":Oil<CR>")
+vim.keymap.set("n", "<leader>e", ":w<CR>:Oil<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
 
--- setup copy/pasting behaviour
-vim.api.nvim_set_keymap("n", "<leader>y", '"+y', { noremap = true, silent = true }) -- Copy to system clipboard
-vim.api.nvim_set_keymap("v", "<leader>y", '"+y', { noremap = true, silent = true }) -- Copy to system clipboard in visual mode
+-- insert new above or below current line without exiting normal mode
+vim.api.nvim_set_keymap("n", "<leader>o", "o<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>O", "O<Esc>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>p", '"+p', { noremap = true, silent = true }) -- Paste from system clipboard
-vim.api.nvim_set_keymap("v", "<leader>p", '"+p', { noremap = true, silent = true }) -- Paste from system clipboard in visual mode
+-- toggle nvim/system clipboard
+vim.keymap.set("n", "<leader>c", function()
+	local clipboard = vim.opt.clipboard:get()
+	if vim.tbl_contains(clipboard, "unnamedplus") then
+		vim.opt.clipboard = {}
+		print("nvim clipboard selected")
+	else
+		vim.opt.clipboard = { "unnamedplus" }
+		print("system clipboard selected")
+	end
+end, { noremap = true, silent = true })
