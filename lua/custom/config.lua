@@ -7,6 +7,8 @@ vim.api.nvim_create_autocmd("VimLeave", {
     end
 })
 
+-- don't show the default text on startup
+vim.opt.shortmess:append "I"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -14,14 +16,15 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
--- vim.opt.smartindent = true
-
-vim.opt.wrap = false
-
--- vim.opt.swapfile = false
--- vim.opt.backup = false
+local clipboard = vim.opt.clipboard:get()
+if vim.tbl_contains(clipboard, "unnamedplus") then
+	vim.opt.clipboard = {}
+	print("nvim clipboard selected")
+else
+	vim.opt.clipboard = { "unnamedplus" }
+	print("system clipboard selected")
+end
+im.opt.backup = false
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 -- vim.opt.undofile = true
 
