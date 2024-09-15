@@ -1,12 +1,13 @@
 -- autocommands
 -- sets the terminal cursor back to | after exiting nvim
 vim.api.nvim_create_autocmd("VimLeave", {
-    pattern = '*',
-    callback = function()
-        vim.cmd("set guicursor= | call chansend(v:stderr, \"\x1b[ q\")")
-    end
+	pattern = "*",
+	callback = function()
+		vim.cmd('set guicursor= | call chansend(v:stderr, "\x1b[ q")')
+	end,
 })
 
+vim.g.mkdp_browser = "brave"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

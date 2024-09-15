@@ -33,4 +33,4 @@ end, { noremap = true, silent = true })
 
 local embed = require("custom.embed-images")
 
-vim.keymap.set("n", "<leader>ii", embed.insert_image_from_clipboard, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>i", embed.insert_image_from_clipboard, { noremap = true, silent = true })

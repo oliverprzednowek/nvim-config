@@ -18,6 +18,7 @@ end
 -- Function to save clipboard image and insert the path in the markdown file
 M.insert_image_from_clipboard = function()
 	-- Get the full path of the current markdown file
+
 	local file_path = vim.fn.expand("%:p")
 	local dir_path = vim.fn.fnamemodify(file_path, ":h") .. "/.img" -- Directory to save the image
 	local image_name = os.date("%Y-%m-%d-%H-%M-%S") .. ".png" -- Unique name for the image
