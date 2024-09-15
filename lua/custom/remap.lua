@@ -6,6 +6,11 @@ vim.keymap.set("i", "jj", "<Esc>")
 -- setting up plugin remaps
 vim.keymap.set("n", "<leader>e", ":w<CR>:Oil<CR>", { noremap = true, silent = true })
 
+-- setting markdown preview remaps
+vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
+vim.keymap.set("n", "<leader>mc", ":MarkdownPreviewStop<CR>")
+vim.keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>")
+
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
@@ -25,3 +30,7 @@ vim.keymap.set("n", "<leader>c", function()
 		print("system clipboard selected")
 	end
 end, { noremap = true, silent = true })
+
+local embed = require("custom.embed-images")
+
+vim.keymap.set("n", "<leader>ii", embed.insert_image_from_clipboard, { noremap = true, silent = true })
