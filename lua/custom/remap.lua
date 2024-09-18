@@ -13,7 +13,6 @@ vim.keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>")
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
-vim.keymap.set("n", "<leader>wq", ":wq<CR>")
 
 -- insert new above or below current line without exiting normal mode
 vim.api.nvim_set_keymap("n", "<leader>o", "o<Esc>", { noremap = true, silent = true })
