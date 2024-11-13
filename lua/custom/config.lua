@@ -7,6 +7,26 @@ vim.api.nvim_create_autocmd("VimLeave", {
 	end,
 })
 
+-- Remember cursor position when returning to file
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*",
+	callback = function()
+		local mark = vim.fn.line("'\"")
+		if mark > 0 and mark <= vim.fn.line("$") then
+			vim.api.nvim_win_set_cursor(0, { mark, 0 })
+		end
+	end,
+})
+
+-- Enable spell check on markdown and text files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "markdown", "text" },
+	callback = function()
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = "en_us" -- Change to your preferred language
+	end,
+})
+
 vim.g.mkdp_browser = "brave"
 
 vim.opt.nu = true
@@ -34,7 +54,7 @@ vim.opt.pumheight = 10
 
 -- vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 7
 -- vim.opt.signcolumn = "yes"
 -- vim.opt.isfname:append("@-@")
 
