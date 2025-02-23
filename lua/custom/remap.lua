@@ -20,14 +20,14 @@ vim.api.nvim_set_keymap("n", "<leader>O", "O<Esc>", { noremap = true, silent = t
 
 -- toggle nvim/system clipboard
 vim.keymap.set("n", "<leader>c", function()
-	local clipboard = vim.opt.clipboard:get()
-	if vim.tbl_contains(clipboard, "unnamedplus") then
-		vim.opt.clipboard = {}
-		print("nvim clipboard selected")
-	else
-		vim.opt.clipboard = { "unnamedplus" }
-		print("system clipboard selected")
-	end
+    local clipboard = vim.opt.clipboard:get()
+    if vim.tbl_contains(clipboard, "unnamedplus") then
+        vim.opt.clipboard = {}
+        print("nvim clipboard selected")
+    else
+        vim.opt.clipboard = { "unnamedplus" }
+        print("system clipboard selected")
+    end
 end, { noremap = true, silent = true })
 
 local embed = require("custom.embed-images")
