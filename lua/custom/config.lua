@@ -1,5 +1,4 @@
 -- Loosely based on set.lua from https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/set.lua
-
 -- autocommands
 -- sets the terminal cursor back to | after exiting nvim
 -- this is the sequence for the windows terminal spacebar \x1b[4 q
