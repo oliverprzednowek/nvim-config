@@ -4,7 +4,8 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "jj", "<Esc>")
 
 -- setting up plugin remaps
-vim.keymap.set("n", "<leader>e", ":w<CR>:Oil<CR>", { noremap = true, silent = true })
+-- TODO: make this only work if the file has no unwritten changes
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", { noremap = true, silent = true })
 
 -- setting markdown preview remaps
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
@@ -13,6 +14,8 @@ vim.keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>")
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
+
+vim.keymap.set("n", "<leader>n", ":noh<CR>")
 
 -- insert new above or below current line without exiting normal mode
 vim.api.nvim_set_keymap("n", "<leader>o", "o<Esc>", { noremap = true, silent = true })
@@ -30,6 +33,6 @@ vim.keymap.set("n", "<leader>c", function()
     end
 end, { noremap = true, silent = true })
 
+-- TODO: Make embed-images great again
 local embed = require("custom.embed-images")
-
 vim.keymap.set("n", "<leader>i", embed.insert_image_from_clipboard, { noremap = true, silent = true })

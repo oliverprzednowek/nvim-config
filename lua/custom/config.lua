@@ -1,3 +1,5 @@
+-- Loosely based on set.lua from https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/set.lua
+
 -- autocommands
 -- sets the terminal cursor back to | after exiting nvim
 -- this is the sequence for the windows terminal spacebar \x1b[4 q
@@ -30,6 +32,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end,
 })
 
+-- Vim opts
 vim.g.mkdp_browser = "brave-browser"
 
 vim.opt.nu = true
@@ -39,8 +42,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-
--- vim.opt.smartindent = true
+vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
@@ -49,7 +51,7 @@ vim.opt.wrap = false
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 -- vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 -- set auto-completion menu height
@@ -63,4 +65,11 @@ vim.opt.scrolloff = 3
 
 -- vim.opt.updatetime = 50
 
--- vim.opt.colorcolumn = "80"
+
+-- Enable spell check on markdown and text files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "python", "cpp", "c", "java", "lua", "javascript", "typescript", "go", "rust", "sh" },
+    callback = function()
+        vim.opt.colorcolumn = "80"
+    end,
+})
