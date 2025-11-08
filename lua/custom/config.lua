@@ -65,7 +65,6 @@ vim.opt.scrolloff = 3
 
 -- vim.opt.updatetime = 50
 
-
 -- Enable spell check on markdown and text files
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "python", "cpp", "c", "java", "lua", "javascript", "typescript", "go", "rust", "sh" },
