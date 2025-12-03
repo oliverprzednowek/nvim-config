@@ -36,3 +36,21 @@ end, { noremap = true, silent = true })
 -- TODO: Make embed-images great again
 local embed = require("custom.embed-images")
 vim.keymap.set("n", "<leader>i", embed.insert_image_from_clipboard, { noremap = true, silent = true })
+
+-- LSP-related
+vim.keymap.set("n", "<leader>d", function()
+    vim.diagnostic.open_float(0, { scope = "line" })
+end, { desc = "Show diagnostics under cursor" })
+
+-- different error view
+vim.keymap.set('n', '<leader>k', function()
+  vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
+
+  vim.api.nvim_create_autocmd('CursorMoved', {
+    group = vim.api.nvim_create_augroup('line-diagnostics', { clear = true }),
+    callback = function()
+      vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+      return true
+    end,
+  })
+end)
