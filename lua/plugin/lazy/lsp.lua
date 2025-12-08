@@ -5,7 +5,6 @@ return {
 			"lua_ls@3.15.0",
 			"pyright",
 			"clangd",
-			"gofmt",
 		},
 	},
 	dependencies = {

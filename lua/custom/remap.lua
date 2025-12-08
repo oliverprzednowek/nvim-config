@@ -5,49 +5,28 @@ vim.keymap.set("i", "jj", "<Esc>")
 
 -- setting up plugin remaps
 -- TODO: make this only work if the file has no unwritten changes
-vim.keymap.set("n", "<leader>e", ":Oil<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", { noremap = true, silent = true, desc = "Open file explorer (oil.nvim)"})
 
 -- setting markdown preview remaps
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 vim.keymap.set("n", "<leader>mc", ":MarkdownPreviewStop<CR>")
 vim.keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>")
 
-vim.keymap.set("n", "<leader>q", ":q<CR>")
-vim.keymap.set("n", "<leader>w", ":w<CR>")
+vim.keymap.set("n", "<leader>q", ":q<CR>", {desc = "quit"})
+vim.keymap.set("n", "<leader>w", ":w<CR>", {desc = "write file"})
 
-vim.keymap.set("n", "<leader>n", ":noh<CR>")
+vim.keymap.set("n", "<leader>n", ":noh<CR>", {desc = ":noh"})
 
 -- insert new above or below current line without exiting normal mode
 vim.api.nvim_set_keymap("n", "<leader>o", "o<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>O", "O<Esc>", { noremap = true, silent = true })
-
--- toggle nvim/system clipboard
-vim.keymap.set("n", "<leader>c", function()
-	local clipboard = vim.opt.clipboard:get()
-	if vim.tbl_contains(clipboard, "unnamedplus") then
-		vim.opt.clipboard = {}
-		print("nvim clipboard selected")
-	else
-		vim.opt.clipboard = { "unnamedplus" }
-		print("system clipboard selected")
-	end
-end, { noremap = true, silent = true })
-
--- TODO: Make embed-images great again
-local embed = require("custom.embed-images")
-vim.keymap.set("n", "<leader>i", embed.insert_image_from_clipboard, { noremap = true, silent = true })
 
 ---------------
 -- LSP-related
 ---------------
 
 -- error view
---[[ vim.keymap.set("n", "<leader>e", function()
-    vim.diagnostic.open_float({ scope = "line" })
-end, { desc = "Show diagnostics under cursor (hover)" }) ]]
-
--- different error view
-vim.keymap.set("n", "<leader>k", function()
+vim.keymap.set("n", "<leader>d", function()
 	vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
 
 	vim.api.nvim_create_autocmd("CursorMoved", {
@@ -59,8 +38,12 @@ vim.keymap.set("n", "<leader>k", function()
 	})
 end, { desc = "Show diagnostics under cursor (inline)" })
 
+-- different error view
+--[[ vim.keymap.set("n", "<leader>e", function()
+    vim.diagnostic.open_float({ scope = "line" })
+end, { desc = "Show diagnostics under cursor (hover)" }) ]]
+
 -- format file
 vim.keymap.set("n", "<leader>F", function()
 	vim.lsp.buf.format({ async = true })
 end, { desc = "Format file" })
-

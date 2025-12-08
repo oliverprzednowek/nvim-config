@@ -6,30 +6,55 @@
 -- the one currently in there is for konsole
 
 vim.api.nvim_create_autocmd("VimLeave", {
-    pattern = "*",
-    callback = function()
-        vim.cmd('set guicursor= | call chansend(v:stderr, "\x1b[5 q")')
-    end,
+	pattern = "*",
+	callback = function()
+		vim.cmd('set guicursor= | call chansend(v:stderr, "\x1b[5 q")')
+	end,
 })
 
 -- Remember cursor position when returning to file
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        local mark = vim.fn.line("'\"")
-        if mark > 0 and mark <= vim.fn.line("$") then
-            vim.api.nvim_win_set_cursor(0, { mark, 0 })
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		local mark = vim.fn.line("'\"")
+		if mark > 0 and mark <= vim.fn.line("$") then
+			vim.api.nvim_win_set_cursor(0, { mark, 0 })
+		end
+	end,
 })
 
 -- Enable spell check on markdown and text files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "markdown", "text" },
-    callback = function()
-        vim.opt_local.spell = true
-        vim.opt_local.spelllang = "en_us" -- Change to your preferred language
-    end,
+	pattern = { "markdown", "text" },
+	callback = function()
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = "en_us" -- Change to your preferred language
+	end,
+})
+
+-- Start with virtual text OFF (because you'll toggle it)
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+})
+
+-- Turn ON inline errors when entering Normal mode
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "*:n", -- any mode → Normal mode
+	callback = function()
+		vim.diagnostic.config({ virtual_text = true })
+	end,
+})
+
+-- Turn OFF inline errors when leaving Normal mode (going into Insert mode)
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "n:*", -- Normal mode → any other mode
+	callback = function()
+		vim.diagnostic.config({ virtual_text = false })
+	end,
 })
 
 -- Vim opts
@@ -46,7 +71,6 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 vim.opt.shortmess:append("I")
-
 
 -- vim.opt.swapfile = false
 -- vim.opt.backup = false
