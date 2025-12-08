@@ -23,34 +23,44 @@ vim.api.nvim_set_keymap("n", "<leader>O", "O<Esc>", { noremap = true, silent = t
 
 -- toggle nvim/system clipboard
 vim.keymap.set("n", "<leader>c", function()
-    local clipboard = vim.opt.clipboard:get()
-    if vim.tbl_contains(clipboard, "unnamedplus") then
-        vim.opt.clipboard = {}
-        print("nvim clipboard selected")
-    else
-        vim.opt.clipboard = { "unnamedplus" }
-        print("system clipboard selected")
-    end
+	local clipboard = vim.opt.clipboard:get()
+	if vim.tbl_contains(clipboard, "unnamedplus") then
+		vim.opt.clipboard = {}
+		print("nvim clipboard selected")
+	else
+		vim.opt.clipboard = { "unnamedplus" }
+		print("system clipboard selected")
+	end
 end, { noremap = true, silent = true })
 
 -- TODO: Make embed-images great again
 local embed = require("custom.embed-images")
 vim.keymap.set("n", "<leader>i", embed.insert_image_from_clipboard, { noremap = true, silent = true })
 
+---------------
 -- LSP-related
-vim.keymap.set("n", "<leader>d", function()
-    vim.diagnostic.open_float(0, { scope = "line" })
-end, { desc = "Show diagnostics under cursor" })
+---------------
+
+-- error view
+--[[ vim.keymap.set("n", "<leader>e", function()
+    vim.diagnostic.open_float({ scope = "line" })
+end, { desc = "Show diagnostics under cursor (hover)" }) ]]
 
 -- different error view
-vim.keymap.set('n', '<leader>k', function()
-  vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
+vim.keymap.set("n", "<leader>k", function()
+	vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
 
-  vim.api.nvim_create_autocmd('CursorMoved', {
-    group = vim.api.nvim_create_augroup('line-diagnostics', { clear = true }),
-    callback = function()
-      vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
-      return true
-    end,
-  })
-end)
+	vim.api.nvim_create_autocmd("CursorMoved", {
+		group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true }),
+		callback = function()
+			vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+			return true
+		end,
+	})
+end, { desc = "Show diagnostics under cursor (inline)" })
+
+-- format file
+vim.keymap.set("n", "<leader>F", function()
+	vim.lsp.buf.format({ async = true })
+end, { desc = "Format file" })
+
