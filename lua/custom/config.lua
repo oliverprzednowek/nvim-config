@@ -1,36 +1,5 @@
 -- Loosely based on set.lua from https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/set.lua
 
--- autocommands
--- sets the terminal cursor back to | after exiting nvim
--- this is the sequence for the windows terminal spacebar \x1b[4 q
--- the one currently in there is for konsole
-
-vim.api.nvim_create_autocmd("VimLeave", {
-	pattern = "*",
-	callback = function()
-		vim.cmd('set guicursor= | call chansend(v:stderr, "\x1b[5 q")')
-	end,
-})
-
--- Remember cursor position when returning to file
-vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "*",
-	callback = function()
-		local mark = vim.fn.line("'\"")
-		if mark > 0 and mark <= vim.fn.line("$") then
-			vim.api.nvim_win_set_cursor(0, { mark, 0 })
-		end
-	end,
-})
-
--- Enable spell check on markdown and text files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "markdown", "text" },
-	callback = function()
-		vim.opt_local.spell = true
-		vim.opt_local.spelllang = "en_us" -- Change to your preferred language
-	end,
-})
 
 -- Start with virtual text OFF (because you'll toggle it)
 vim.diagnostic.config({
