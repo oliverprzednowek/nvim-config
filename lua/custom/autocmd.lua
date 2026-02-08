@@ -3,6 +3,14 @@
 -- this is the sequence for the windows terminal spacebar \x1b[4 q
 -- the one currently in there is for konsole
 
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argc() == 0 then
+			require("telescope.builtin").find_files()
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("VimLeave", {
 	pattern = "*",
 	callback = function()

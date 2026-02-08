@@ -16,6 +16,8 @@ vim.keymap.set("n", "<leader>q", ":q<CR>", {desc = "quit"})
 vim.keymap.set("n", "<leader>w", ":w<CR>", {desc = "write file"})
 
 vim.keymap.set("n", "<leader>n", ":noh<CR>", {desc = ":noh"})
+vim.keymap.set("n", "<leader>td", ":Telescope diagnostics<CR>", {desc = "Telescope Diagnostics"})
+
 
 -- insert new above or below current line without exiting normal mode
 vim.api.nvim_set_keymap("n", "<leader>o", "o<Esc>", { noremap = true, silent = true })
@@ -39,9 +41,9 @@ vim.keymap.set("n", "<leader>d", function()
 end, { desc = "Show diagnostics under cursor (inline)" })
 
 -- different error view
---[[ vim.keymap.set("n", "<leader>e", function()
+vim.keymap.set("n", "<leader>D", function()
     vim.diagnostic.open_float({ scope = "line" })
-end, { desc = "Show diagnostics under cursor (hover)" }) ]]
+end, { desc = "Show diagnostics under cursor (hover)" })
 
 -- format file
 vim.keymap.set("n", "<leader>F", function()
