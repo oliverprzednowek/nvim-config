@@ -14,9 +14,8 @@ vim.keymap.set("n", "<leader>mt", ":MarkdownPreviewToggle<CR>")
 
 vim.keymap.set("n", "<leader>q", ":q<CR>", {desc = "quit"})
 vim.keymap.set("n", "<leader>w", ":w<CR>", {desc = "write file"})
-
 vim.keymap.set("n", "<leader>n", ":noh<CR>", {desc = ":noh"})
-vim.keymap.set("n", "<leader>td", ":Telescope diagnostics<CR>", {desc = "Telescope Diagnostics"})
+vim.keymap.set("n", "<leader>s", ":set scrolloff=", {desc = "set scrolloff"})
 
 
 -- insert new above or below current line without exiting normal mode
@@ -26,6 +25,9 @@ vim.api.nvim_set_keymap("n", "<leader>O", "O<Esc>", { noremap = true, silent = t
 ---------------
 -- LSP-related
 ---------------
+
+-- view diagnostics
+vim.keymap.set("n", "<leader>td", ":Telescope diagnostics<CR>", {desc = "Telescope Diagnostics"})
 
 -- error view
 vim.keymap.set("n", "<leader>d", function()

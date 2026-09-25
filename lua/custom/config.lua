@@ -40,6 +40,7 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 vim.opt.shortmess:append("I")
+vim.opt.modeline = false
 
 -- vim.opt.swapfile = false
 -- vim.opt.backup = false
@@ -54,7 +55,7 @@ vim.opt.pumheight = 10
 
 -- vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 50
 -- vim.opt.signcolumn = "yes"
 -- vim.opt.isfname:append("@-@")
 

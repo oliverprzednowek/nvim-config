@@ -55,6 +55,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP: Go to implementation",
 		})
 
+		vim.keymap.set("n", "grr", function()
+			require("telescope.builtin").lsp_references()
+		end, { desc = "Go to references (Telescope)" })
+
 		-- vim.keymap.set("n", "gr", vim.lsp.buf.references, {
 		-- 	desc = "LSP: References",
 		-- })
